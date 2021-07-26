@@ -1,0 +1,57 @@
+[core]
+    editor = vim
+    pager = less -R -X -F
+    excludesfile = $HOME/.gitignore_global
+
+[alias]
+    br = branch
+    ba = branch -a
+    bd = branch -D
+    co = checkout
+    cb = checkout -b
+    st = status
+    stt = status -uno
+    sta = stash
+    stas = stash save
+    stac = stash clear
+    stap = stash pop
+    stad = stash drop
+    stal = stash list
+    ra = remote -a
+    gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+    difff = diff --word-diff
+    sb = show-branch
+    fe = fetch
+    pl = pull origin
+    rs = restore
+    ce = config --edit
+    ceg = config --edit --global
+    srso = set remote set-url origin
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    blame = auto
+
+[user]
+    name = d_ito
+    email = ito@gizumo-inc.jp
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[commit]
+    template = $HOME/.commit_template
+
