@@ -1,9 +1,8 @@
 #!/bin/sh
 
-DOTPATH=~/.dotfiles
 
 for f in .??*
 do
     [ "$f" = ".git" ] && continue
-    ln -snfv "$DOTPATH/$f" "$HOME"/"$f"
+    ln -snfv "$PWD/$f" "$HOME"/test/"$f"
 done
