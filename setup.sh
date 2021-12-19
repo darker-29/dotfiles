@@ -15,9 +15,15 @@ echo ''
 # Dotfilesの配置
 for f in .??*
 do
-    [ "$f" = ".git" ] && continue
-    ln -s $PWD/$f $HOME/$f
+  [ "$f" = ".git" ] && continue
+  ln -s $PWD/$f $HOME/$f
 done
+
+
+if [ ! -d $HOME/.config/alacritty ]; then
+  mkdir -p $HOME/.config/alacritty
+  ln -s $PWD/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+fi
 
 sudo nvram SystemAudioVolume=" "
 
