@@ -4,5 +4,5 @@
 for f in .??*
 do
     [ "$f" = ".git" ] && continue
-    ln -snfv "$PWD/$f" "$HOME"/test/"$f"
+    ln -s $PWD/$f $HOME/test/$f
 done
