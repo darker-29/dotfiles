@@ -1,127 +1,162 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
+
+let mapleader = "\<SPACE>"
 
 if !isdirectory(expand("~/.vim/bundle/Vundle.vim/"))
     echo "install neobundle..."
     :call system("git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim")
 endif
 
-" set the runtime path to include Vundle and initialize
+" set the runtime path to include Vundle and initialize set rtp+=~/.vim/bundle/Vundle.vim call vundle#begin()
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" 自動保存設定プラグイン
+"https://github.com/vim-scripts/vim-auto-save
+Plugin 'vim-scripts/vim-auto-save'
+
+" shellコマンドの補完機能提供プラグイン
+" https://github.com/Shougo/vimshell.vim
 Plugin 'Shougo/vimshell'
 
-" ファイル関連 Plugin 'Shougo/unite.vim'
-Plugin 'ujihisa/unite-colorscheme'
+" NerdTree本体
+" https://github.com/preservim/nerdtree
+Plugin 'preservim/nerdtree'
 
-" ウィンドウ関連
-Plugin 'scrooloose/nerdtree' " Nerdtree導入
-Plugin 'Xuyuanp/nerdtree-git-plugin' " Nerdtree各ディレクトリ・ファイルにgitのステータス表示
-Plugin 'ryanoasis/vim-devicons' " Nerdtreeの各ディレクトリ・ファイルのアイコンを表示
+" Nerdtree各ディレクトリ・ファイルにgitのステータス表示
+" https://github.com/Xuyuanp/nerdtree-git-plugin
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" NerdTreeに表示されるファイルの拡張子ごとにアイコンを表示
+" https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" マークダウン編集
-Plugin 'previm/previm' " pv でブラウザ上にマークダウン表示
-Plugin 'godlygeek/tabular'
-Plugin 'h1mesuke/vim-alignta'
-Plugin 'dhruvasagar/vim-table-mode'
+" vim-nerttree-syntax-highlightの依存先プラグイン
+" https://github.com/ryanoasis/vim-devicons
+Plugin 'ryanoasis/vim-devicons'
 
-" バッファコントロール
-Plugin 'rbgrouleff/bclose.vim'
+" マークダウンをブラウザ上でプレビュー
+" :pv 入力で PrevimOpenを実行
+" https://github.com/previm/previm
+Plugin 'previm/previm'
+
+" テーブルマークダウン編集モードプラグイン
+" :tme 入力で TableModeEnableを実行
+" :tmd 入力で TableModeDisableを実行
+" https://github.com/dhruvasagar/vim-table-mode
+Plugin 'dhruvasagar/vim-table-mode'
 
 " ステータスライン設定
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-" airline カラースキーマ
-Plugin 'w0ng/vim-hybrid'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'dsolstad/vim-wombat256i'
-Plugin 'junegunn/seoul256.vim'
-
 " vim カラースキーマ 気分で変更
 Plugin 'tomasr/molokai'
 Plugin 'ltlollo/diokai'
-Plugin 'YorickPeterse/happy_hacking.vim'
+Plugin 'morhetz/gruvbox'
 
 " 入力補助プラグイン
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'mattn/emmet-vim'
 Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdcommenter' " \cc => コメント \ci => コメント状態切替 \cA => 行末コメント追加 \cs => ブロックコメント追加
 
+" コメント入力補助
+" \cc => コメント \ci => コメント状態切替 \cA => 行末コメント追加 \cs => ブロックコメント追加
+" https://github.com/preservim/nerdcommenter
+Plugin 'preservim/nerdcommenter'
+
+" ファイルの即時実行
+" https://github.com/thinca/vim-quickrun
 Plugin 'thinca/vim-quickrun'
 
 " 構文チェックプラグイン
 Plugin 'scrooloose/syntastic'
 
-" align
-Plugin 'junegunn/vim-easy-align'
-
 " git blameやstatus等をvimで実行
 Plugin 'tpope/vim-fugitive'
 
+" 矩形選択の拡張プラグイン
+" 大文字Kを押す度に拡大、大文字Jを押す度に縮小
+" https://github.com/terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
+
 " 対応する[], ''などを削除
 Plugin 'tpope/vim-surround'
-
-" 複数行コメントイン・アウト
-Plugin 'tpope/vim-commentary'
 
 " ??
 Plugin 'jiangmiao/auto-pairs'
 
 " git line status
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 
 " go plugin
 Plugin 'fatih/vim-go'
 Plugin 'AndrewRadev/splitjoin.vim'
 
-call vundle#end()
+" jump
+Plugin 'easymotion/vim-easymotion'
 
-filetype plugin indent on    " required
+" PHP補完
+Plugin 'phpactor/phpactor'
+
+call vundle#end()
+filetype plugin indent on
 
 " color
 syntax on
 set background=dark
 
-" colorscheme list
+" favorite colorscheme list
 " 1. molokai
-" 2. diokai
-" 3. happy_hacking
-"set termguicolors " * が付いているものを使用する場合にコメント解除
-colorscheme diokai
+" 2. gruvbox
+colorscheme gruvbox
 
 " key-bindings
 noremap j gj
 noremap k gk
-noremap v v$
+noremap vv v$
 noremap f $
 noremap m 0
-noremap t %
 noremap , A
-noremap . I
+noremap ; I
 noremap ? O
 
 " buffer key-binds
 noremap <silent> <C-j> :bnext<CR>
 noremap <silent> <C-k> :bprev<CR>
 
-" NerdTree
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" NerdTree Enter2回
+nnoremap <silent> <Enter><Enter> :NERDTreeToggle<CR>
 
-nnoremap <leader>a :cclose<CR>
 " ESC2回押下で検索文字のハイライト表示終了
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 
-" インサートモードから抜ける
+" インサートモード終了
 inoremap <silent> jj <ESC>
+
+" インサートモード終了 & 保存 & 終了
+inoremap <silent> <C-j><C-j> <ESC>:wq<Enter>
+
+" ノーマルモードから保存 & 終了
+noremap <silent> <Space>bb :wq<Enter>
+
+" ノーマルモードから保存せず終了
+noremap <silent> <Space>nn :q!<Enter>
+
+" ウィンドウ分割
+noremap <silent> <Space>vs :vs<Enter>
+noremap <silent> <Space>vv :sp<Enter>
+
+" カーソル外のウィンドウ閉じ
+noremap <silent> <Space>oo <C-w>o
+
+" ウィンドウ切り替え
+noremap <silent> <Space>mm <C-w><C-w>
 
 " jump pear blackets
 inoremap { {}<LEFT>
@@ -134,6 +169,7 @@ vnoremap [ "zdi^V[<C-R>z]<ESC>
 vnoremap ( "zdi^V(<C-R>z)<ESC>
 vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
+
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -144,11 +180,12 @@ nmap ga <Plug>(EasyAlign)
 cmap bc Bclose
 cmap tm terminal
 cmap pv PrevimOpen
-cmap ali '<,'>Alignta <- //
+" cmap ali '<,'>Alignta <- //
 cmap tme TableModeEnable
 cmap tmd TableModeDisable
-cmap pi PluginInstall
-cmap pl PluginList
+cmap pinst PluginInstall
+cmap plist PluginList
+cmap qrun QuickRun
 
 " Go alias
 cmap gr GoRun
@@ -165,33 +202,44 @@ cmap gims GoImports
 cmap gima GoImportAs
 cmap gill GoInstall
 cmap gdp GoDrop
-"cmap cn cnext
-"cmap cp cprevious
 
 " GO カバレッジToggle
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-" PHP
+
+" PHP用設定
 let g:PHP_vintage_case_default_indent = 1
 let g:PHP_outdentphpescape = 0
+autocmd FileType php,ctp set dictionary=~/.vim/dict/php.dict
+inoremap <silent> cc <C-x><C-k>
+" autocmd FileType php set makeprg=php\ -l\ %
+" autocmd BufWritePost *.php silent make | if len(getqflist()) != 1 | copen | else | cclose | endif
 
-" vim-airline
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+" ステータスバーの設定
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='jet'
+let g:airline_theme='gruvbox'
+
+" vim-nerdtree-syntax-highlight プラグインを導入すると遅くなる問題解消設定
+" アイコンを表示する拡張子を下記に限定
+" .bmp, .c, .coffee, .cpp, .cs, .css, .erb, .go, .hs, .html, .java, .jpg, .js, .json, .jsx, .less, .lua, .markdown, .md, .php, .png, .pl, .py, .rb, .rs, .scala, .scss, .sh, .sql, .vim
+let g:NERDTreeLimitedSyntax = 1
 
 "画面表示系
-"set cursorcolumn " カーソル列のハイライト表示 ←カーソル遅くなる原因
+set cursorcolumn " カーソル列のハイライト表示 ←カーソル遅くなる原因
 set cursorline " カーソル行のハイライト表示 ←カーソル遅くなる原因
 set number " 行数を表示
 set showmatch " 対応する記号を強調して表示
 set laststatus=2 " ステータス行を2行表示
-set scrolloff=20 "常に20行目がセンターに来るよう移動表示
+set scrolloff=20 " 常に20行目がセンターに来るよう移動表示
 
 "ファイル系
-set autoread "他でファイルに変更があった場合に読み込み
-set noswapfile "スワップファイルの生成をしない
-set hidden "保存されていないファイルがあっても別のファイルを表示可能
-set nobackup "ファイル保存中にバックアップファイルを作らない
-set fenc=utf-8 "保存ファイルの文字コード
+set autoread " 他でファイルに変更があった場合に読み込み
+set noswapfile " スワップファイルの生成をしない
+set hidden " 保存されていないファイルがあっても別のファイルを表示可能
+set nobackup " ファイル保存中にバックアップファイルを作らない
+set fenc=utf-8 " 保存ファイルの文字コード
 
 set showcmd
 set visualbell "ピープ音の無効化
@@ -218,13 +266,15 @@ set nowrapscan "最後尾まで検索を終えたら次の検索で先頭に移�
 " 行末タブや半角スペースなどの特殊文字
 set list
 set listchars=tab:>\ ,trail:-,nbsp:%,extends:>,precedes:<
+
 " cursor
 set backspace=eol,indent,start
 set wildmode=list:longest
 set nrformats=""
 
 " 自動保存
-set autowrite
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
 
 " highlight
 " ctermbg =>  - の色 ctermfg => 半角スペース可視化色
@@ -251,12 +301,10 @@ let g:NERDTreeShowHidden=1
 " バッファ外(空行)のチルダ非表示
 highlight link EndOfBuffer Ignore
 
-" vim と実行した場合に現在のディレクトリのノードツリー表示
+" NerdTree vim を実行した場合に現在のディレクトリの表示
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" vim-nerdtree-syntax-highlight プラグイン導入すると遅くなる問題解消設定
-let g:NERDTreeLimitedSyntax = 1
 
 " thincaさんのカーソルラインが原因で描画遅い問題解消設定
 augroup vimrc-auto-cursorline
@@ -294,10 +342,7 @@ hi ZenkakuSpace cterm=underline ctermbg=124 ctermfg=124 guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /　/
 
 
-
-
 " go用の設定
-
 filetype off
 filetype plugin indent off
 set runtimepath+=/usr/local/go/misc/vim
@@ -305,3 +350,8 @@ au FileType go setlocal sw=4 ts=4 sts=4 noet
 au FileType go setlocal makeprg=go\ build\ ./... errorformat=%f:%l:\ %m
 filetype plugin indent on
 syntax on
+
+
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+
