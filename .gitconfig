@@ -34,10 +34,6 @@
     branch = auto
     blame = auto
 
-[user]
-    name = d_ito
-    email = ito@gizumo-inc.jp
-
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
