@@ -95,6 +95,18 @@ defaults write com.apple.Safari SuppressSearchSuggestions -boolean true
 # 検索クエリを Apple へ送信しない
 defaults write com.apple.Safari UniversalSearchEnabled -boolean false
 
+# トラックパッドのカーソル移動速度コントロール
+defaults write -g com.apple.trackpad.scaling 3
+
+# マウスのカーソル移動速度コントロール
+defaults write -g com.apple.mouse.scaling 1.5
+
+# キーリピート自体の速度コントロール
+defaults write -g KeyRepeat -int 1
+
+# キーを長押してから連続入力される(リピート)までの認識時間短縮
+defaults write -g InitialKeyRepeat -int 10
+
 # 各種アプリケーションの再起動
 killall Finder
 killall Dock
