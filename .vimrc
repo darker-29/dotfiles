@@ -59,7 +59,6 @@ Plugin 'ltlollo/diokai'
 Plugin 'morhetz/gruvbox'
 
 " 入力補助プラグイン
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'ervandew/supertab'
 
 " コメント入力補助
