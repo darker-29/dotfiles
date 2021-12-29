@@ -137,7 +137,7 @@ brew install git-secrets
 brew install python
 brew install go
 brew install hashicorp/tap/terraform
-
+brew install tmux
 
 ##### 各種CLIのインストール ##### 
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
