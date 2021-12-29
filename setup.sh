@@ -25,8 +25,12 @@ if [ ! -d $HOME/.config/alacritty ]; then
   ln -s $PWD/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 fi
 
-sudo nvram SystemAudioVolume=" "
+if [ ! -d $HOME/.config/powerline-shell ]; then
+    mkdir -p $HOME/.config/powerline-shell
+    ln -s $PWD/powerline-shell/config.json $HOME/powerline-shell/config.json
+fi
 
+sudo nvram SystemAudioVolume=" "
 
 
 ##### MacのOS設定 #####
@@ -122,7 +126,6 @@ killall SystemUIServer
 
 
 ##### brewのインストールとアプリケーションインストール #####
-
 
 brew install google-chrome --cask
 brew install alfred --cask
