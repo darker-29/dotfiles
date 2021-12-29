@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # Mac以外のOSだった場合は処理を中断
 if [ "$(uname)" != "Darwin" ] ; then
   echo 'Whoops!! Not macOS!!'
@@ -12,13 +11,12 @@ echo ''
 echo 'Start Setup MacOS Settings...'
 echo ''
 
-# Dotfilesの配置
+##### Dotfilesの配置 #####
 for f in .??*
 do
   [ "$f" = ".git" ] && continue
   ln -s $PWD/$f $HOME/$f
 done
-
 
 if [ ! -d $HOME/.config/alacritty ]; then
   mkdir -p $HOME/.config/alacritty
@@ -117,11 +115,13 @@ defaults write -g KeyRepeat -int 1
 # キーを長押してから連続入力される(リピート)までの認識時間短縮
 defaults write -g InitialKeyRepeat -int 10
 
+# スクリーンショットの保存場所を変更
+defaults write com.apple.screencapture location ~/ScreenShots/;killall SystemUIServer
+
 # 各種アプリケーションの再起動
 killall Finder
 killall Dock
 killall SystemUIServer
-
 
 
 
@@ -133,4 +133,12 @@ brew install spectacle --cask
 brew install macwinzipper --cask
 brew install postman --cask
 brew install docker --cask
+brew install git-secrets
+brew install python
+brew install go
+brew install hashicorp/tap/terraform
 
+
+##### 各種CLIのインストール ##### 
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
