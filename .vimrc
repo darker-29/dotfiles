@@ -16,7 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " 自動保存設定プラグイン
 "https://github.com/vim-scripts/vim-auto-save
-Plugin 'vim-scripts/vim-auto-save'
+" Plugin 'vim-scripts/vim-auto-save'
 
 " shellコマンドの補完機能提供プラグイン
 " https://github.com/Shougo/vimshell.vim
@@ -100,6 +100,9 @@ Plugin 'easymotion/vim-easymotion'
 " PHP補完
 Plugin 'phpactor/phpactor'
 
+" Terraformインデント揃え
+Plugin 'hashivim/vim-terraform'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -142,10 +145,7 @@ inoremap <silent> jj <ESC>
 inoremap <silent> <C-j><C-j> <ESC>:wq<Enter>
 
 " ノーマルモードから保存 & 終了
-noremap <silent> <Space>bb :wq<Enter>
-
-" ノーマルモードから保存せず終了
-noremap <silent> <Space>nn :q!<Enter>
+noremap <silent> <Space>nn :wq<Enter>
 
 " ウィンドウ分割
 noremap <silent> <Space>vs :vs<Enter>
@@ -350,6 +350,8 @@ au FileType go setlocal makeprg=go\ build\ ./... errorformat=%f:%l:\ %m
 filetype plugin indent on
 syntax on
 
+" Terraformのインデント揃え
+let g:terraform_fmt_on_save = 1
 
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
