@@ -136,7 +136,7 @@ brew install docker --cask
 brew install git-secrets
 brew install python
 brew install go
-brew install hashicorp/tap/terraform
+brew install tfenv
 brew install tmux
 brew install tree
 
