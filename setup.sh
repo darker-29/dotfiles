@@ -126,19 +126,16 @@ killall SystemUIServer
 
 
 ##### brewのインストールとアプリケーションインストール #####
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install google-chrome --cask
-brew install alfred --cask
-brew install spectacle --cask
-brew install macwinzipper --cask
-brew install postman --cask
-brew install docker --cask
-brew install git-secrets
-brew install python
-brew install go
-brew install tfenv
-brew install tmux
-brew install tree
+do
+  ln -s $PWD/.Brewfile $HOME/.Brewfile
+done
+
+brew bundle --global
+
+
+
 
 ##### 各種CLIのインストール ##### 
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
