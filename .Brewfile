@@ -10,6 +10,7 @@ brew go
 brew python
 
 brew tmux
+brew keyboardcleantool
 
 brew tfenv
 brew tflint
@@ -17,3 +18,5 @@ brew tfsec
 
 brew wget
 brew tree
+brew zsh
+brew zsh-completion
