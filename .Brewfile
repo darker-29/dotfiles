@@ -1,22 +1,24 @@
-brew google-chrome
-brew spectacle
-brew macwinzipper
-brew postman
-brew docker
-brew git-secrets
+brew "google-chromei"
+brew "spectacle"
+brew "macwinzipper"
+brew "postman"
+brew "docker"
+brew "git-secrets"
 
-brew php
-brew go
-brew python
+brew "php"
+brew "go"
+brew "python"
 
-brew tmux
-brew keyboardcleantool
+brew "tmux"
+brew "keyboardcleantool"
 
-brew tfenv
-brew tflint
-brew tfsec
+brew "tfenv"
+brew "tflint"
+brew "tfsec"
 
-brew wget
-brew tree
-brew make
-brew zsh-completion
+brew "wget"
+brew "tree"
+brew "make"
+brew "zsh-completion"
+brew "jq"
+brew "locate"
