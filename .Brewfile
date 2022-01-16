@@ -18,4 +18,5 @@ brew tfsec
 
 brew wget
 brew tree
+brew make
 brew zsh-completion
