@@ -43,14 +43,14 @@ defaults write -g NSScrollViewRubberbanding -boolean false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # .DS_Storeを生成しないようにする
-defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-defaults write com.apple.desktopservices DSDontWriteUSBStores true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -boolean true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -boolean true
 
 # オートマチックウィンドウアニメーショ全て無効化する
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -boolean false
 
 # ダイアログの表示速度を速める
-defaults write -g NSWindowResizeTime 0.001
+defaults write -g NSWindowResizeTime -float 0.001
 
 # アイコンをドラッグした時のアニメーショを無効化する
 defaults write com.apple.finder AnimateSnapToGrid -boolean false
@@ -105,10 +105,10 @@ defaults write com.apple.Safari SuppressSearchSuggestions -boolean true
 defaults write com.apple.Safari UniversalSearchEnabled -boolean false
 
 # トラックパッドのカーソル移動速度コントロール
-defaults write -g com.apple.trackpad.scaling 3
+defaults write -g com.apple.trackpad.scaling -int 3
 
 # マウスのカーソル移動速度コントロール
-defaults write -g com.apple.mouse.scaling 1.5
+defaults write -g com.apple.mouse.scaling -float 1.5
 
 # キーリピート自体の速度コントロール
 defaults write -g KeyRepeat -int 1
@@ -117,9 +117,14 @@ defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
 
 # スクリーンショットの保存場所を変更
-defaults write com.apple.screencapture location ~/ScreenShots/;killall SystemUIServer
+
+if [[ ! -d "~/ScreenShots" ]]; then
+    mkdir -p "~/ScreenShots"
+fi
+defaults write com.apple.screencapture location -string "~/ScreenShots"
 
 # 各種アプリケーションの再起動
+killall SystemUIServer
 killall Finder
 killall Dock
 killall SystemUIServer
