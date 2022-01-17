@@ -42,8 +42,9 @@ defaults write -g NSScrollViewRubberbanding -boolean false
 # スクロールバーを常時表示する
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-# ネットワークドライブで.DS_Storeファイルを作成しないようにする
+# .DS_Storeを生成しないようにする
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+defaults write com.apple.desktopservices DSDontWriteUSBStores true
 
 # オートマチックウィンドウアニメーショ全て無効化する
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -boolean false
