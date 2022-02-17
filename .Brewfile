@@ -3,6 +3,9 @@ brew "spectacle"
 brew "macwinzipper"
 brew "postman"
 brew "docker"
+
+brew "graphviz"
+brew "plantuml"
 brew "git-secrets"
 
 brew "php"
