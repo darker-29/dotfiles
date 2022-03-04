@@ -103,6 +103,10 @@ Plugin 'phpactor/phpactor'
 " Terraformインデント揃え
 Plugin 'hashivim/vim-terraform'
 
+" plantumlのシンタックスチェック
+Plugin 'aklt/plantuml-syntax'
+
+Plugin 'tyru/open-browser.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -356,4 +360,7 @@ let g:terraform_fmt_on_save = 1
 
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
+
+" Chrome上でplantuml表示
+au FileType plantuml command! OpenUml : !open "/Applications/Google Chrome.app"
 
