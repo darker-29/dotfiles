@@ -7,7 +7,9 @@ fi
 
 # PATH
 
-export ZSH="/Users/d_ito/.oh-my-zsh"
+
+export PATH="$PATH:/Users/daiki.ito/Library/Python/3.8/bin"
+export PATH="$PATH:/opt/homebrew/bin/"
 export PATH="$PATH:/bin:/usr/bin:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/opt/mysql@5.7/bin/mysql"
@@ -33,9 +35,9 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
 alias mk="mkdir"
-alias zconf="vi ~/.zshrc"
-alias vconf="vi ~/.vimrc"
-alias gconf="vi ~/.gitconfig"
+alias zconf="vim ~/.zshrc"
+alias vconf="vim ~/.vimrc"
+alias gconf="vim ~/.gitconfig"
 alias phpunit="./vendor/bin/phpunit"
 alias phpcs="./vendor/bin/phpcs"
 alias phpcbf="./vendor/bin/phpcbf"
@@ -73,41 +75,24 @@ alias v-ba="vagrant box add"
 alias v-br="vagrant box rm"
 alias v-v="vi Vagrantfile"
 
-source $ZSH/oh-my-zsh.sh
+# bat
+alias cat="bat --style=plain"
 
 
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-bin-gem-node
 
 # zplugin list
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zsh-users/zsh-completions
-zplugin light zsh-users/zsh-history-substring-search
-zplugin light zsh-users/zsh-syntax-highlighting
+zinit load zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-completions
+zinit load zsh-users/zsh-history-substring-search
+zinit load zsh-users/zsh-syntax-highlighting
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/d_ito/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/d_ito/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f $HOME'/google-cloud-sdk/path.zsh.inc' ]; then . $HOME'/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/d_ito/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/d_ito/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f $HOME'/google-cloud-sdk/completion.zsh.inc' ]; then . $HOME'/google-cloud-sdk/completion.zsh.inc'; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -123,3 +108,60 @@ setopt auto_pushd
 
 ## コマンドの打ち間違いを指摘してくれる
 setopt correct
+
+
+# PowerLine-Shellの実行
+function powerline_precmd() {
+    echo "\n"
+    PS1="$(powerline-shell --shell zsh $?)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ]; then
+    install_powerline_precmd
+fi
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+
+
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
