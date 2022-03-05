@@ -364,3 +364,4 @@ map J <Plug>(expand_region_shrink)
 " Chrome上でplantuml表示
 au FileType plantuml command! OpenUml : !open "/Applications/Google Chrome.app"
 
+command! LG : !lazygit
