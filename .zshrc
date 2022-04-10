@@ -29,7 +29,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # zsh alias
 alias vi="vim"
-alias ll="ls -la"
+alias ls="exa"
+alias ll="exa -la"
+alias tree="tree -C"
+alias mkdir="mkdir -p"
 alias ..="cd .."
 alias ...="cd ../../"
 alias ....="cd ../../../"
@@ -164,4 +167,9 @@ lg()
             cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
+}
+
+ld()
+{
+    lazydocker "$@"
 }
