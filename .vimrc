@@ -108,6 +108,8 @@ Plugin 'aklt/plantuml-syntax'
 
 Plugin 'tyru/open-browser.vim'
 
+Plugin 'xavierchow/vim-swagger-preview'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -365,3 +367,5 @@ map J <Plug>(expand_region_shrink)
 au FileType plantuml command! OpenUml : !open "/Applications/Google Chrome.app"
 
 command! LG : !lazygit
+
+nmap <unique> <leader>e <Plug>GenerateDiagram
