@@ -18,6 +18,7 @@ brew "keyboardcleantool"
 brew "tfenv"
 brew "tflint"
 brew "tfsec"
+brew "terraform_landscape"
 
 brew "wget"
 brew "tree"
@@ -36,3 +37,9 @@ brew "devtoys"
 
 brew "lazygit"
 brew "lazydocker"
+brew "planetscale/tap/pscale"
+brew "dagger/tap/dagger"
+brew "noahgorstein/jqp"
+
+brew "direnv"
+
