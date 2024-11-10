@@ -173,3 +173,14 @@ ld()
 {
     lazydocker "$@"
 }
+
+
+d-kill () {
+  docker rm $(docker stop $1)
+}
+
+
+d-start () {
+  docker build -t $1 .
+  docker run -itd $1
+}

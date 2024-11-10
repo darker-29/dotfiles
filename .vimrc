@@ -110,6 +110,18 @@ Plugin 'tyru/open-browser.vim'
 
 Plugin 'xavierchow/vim-swagger-preview'
 
+" インデント可視化
+Plugin 'preservim/vim-indent-guides'
+
+" 行末の空白を可視化
+Plugin 'bronson/vim-trailing-whitespace'
+
+" Terraform 補完ツール
+Plugin 'juliosueiras/vim-terraform-completion'
+
+
+
+
 call vundle#end()
 filetype plugin indent on
 
@@ -138,6 +150,9 @@ noremap <silent> <C-k> :bprev<CR>
 
 " NerdTree Enter2回
 nnoremap <silent> <Enter><Enter> :NERDTreeToggle<CR>
+
+" IndentGuides Tab2回
+nnoremap <silent> <Tab><Tab> :IndentGuidesToggle<CR>
 
 " ESC2回押下で検索文字のハイライト表示終了
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
@@ -192,6 +207,8 @@ cmap tmd TableModeDisable
 cmap pinst PluginInstall
 cmap plist PluginList
 cmap qrun QuickRun
+
+cmap vconf e ~/.vimrc
 
 " Go alias
 cmap gr GoRun

@@ -7,6 +7,11 @@ brew "docker"
 brew "graphviz"
 brew "plantuml"
 brew "git-secrets"
+brew "git-delta"
+brew "fd"
+brew "genact"
+brew "vhx"
+brew "xh"
 
 brew "php"
 brew "go"
@@ -42,4 +47,6 @@ brew "dagger/tap/dagger"
 brew "noahgorstein/jqp"
 
 brew "direnv"
+
+brew "leoafarias/fvm"
 
