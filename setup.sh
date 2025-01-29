@@ -18,16 +18,6 @@ do
   ln -s $PWD/$f $HOME/$f
 done
 
-if [ ! -d $HOME/.config/alacritty ]; then
-  mkdir -p $HOME/.config/alacritty
-  ln -s $PWD/alacritty.yml $HOME/.config/alacritty/alacritty.yml
-fi
-
-if [ ! -d $HOME/.config/powerline-shell ]; then
-    mkdir -p $HOME/.config/powerline-shell
-    ln -s $PWD/powerline-shell/config.json $HOME/powerline-shell/config.json
-fi
-
 ##### MacOSの設定 #####
 bash ./.MacOS.sh
 
