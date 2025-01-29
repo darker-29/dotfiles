@@ -25,7 +25,12 @@ export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 export PATH="$HOME/.pyenv/shims:$PATH"
 export NVM_DIR="~/.nvm"
 
+
+export PATH="$PATH:/Users/daiki.ito/flutter/bin"
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+export PATH=${PATH}:~/.guard/bin
 
 # zsh alias
 alias vi="vim"
@@ -44,6 +49,9 @@ alias gconf="vim ~/.gitconfig"
 alias phpunit="./vendor/bin/phpunit"
 alias phpcs="./vendor/bin/phpcs"
 alias phpcbf="./vendor/bin/phpcbf"
+
+alias flutter="fvm flutter"
+alias dart="fvm dart"
 
 
 # Docker-Compose alias
@@ -65,30 +73,15 @@ alias dc-il="docker-compose image list"
 alias dc-ir="docker-compose image rm"
 
 
-# Vagrant alias
-alias v-i="vagrant init"
-alias v-u="vagrant up"
-alias v-st="vagrant status"
-alias v-s="vagrant ssh"
-alias v-r="vagrant reload"
-alias v-st="vagrant status"
-alias v-d="vagrant destroy"
-alias v-h="vagrant halt"
-alias v-ba="vagrant box add"
-alias v-br="vagrant box rm"
-alias v-v="vi Vagrantfile"
 
 # bat
 alias cat="bat --style=plain"
 
+# python
+alias python="python3"
 
-### Added by Zinit's installer
-
-# zplugin list
-zinit load zsh-users/zsh-autosuggestions
-zinit load zsh-users/zsh-completions
-zinit load zsh-users/zsh-history-substring-search
-zinit load zsh-users/zsh-syntax-highlighting
+# terraform
+alias tf="terraform"
 
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -104,56 +97,12 @@ if [ -f $HOME'/google-cloud-sdk/completion.zsh.inc' ]; then . $HOME'/google-clou
 #
 ## cdを使わずにディレクトリを移動できる
 setopt auto_cd
-cdpath=(.. ~ /)
 
 ## "cd -"の段階でTabを押すと、ディレクトリの履歴が見れる
 setopt auto_pushd
 
 ## コマンドの打ち間違いを指摘してくれる
 setopt correct
-
-
-# PowerLine-Shellの実行
-function powerline_precmd() {
-    echo "\n"
-    PS1="$(powerline-shell --shell zsh $?)"
-}
-
-function install_powerline_precmd() {
-  for s in "${precmd_functions[@]}"; do
-    if [ "$s" = "powerline_precmd" ]; then
-      return
-    fi
-  done
-  precmd_functions+=(powerline_precmd)
-}
-
-if [ "$TERM" != "linux" ]; then
-    install_powerline_precmd
-fi
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
 
 
 
@@ -174,13 +123,94 @@ ld()
     lazydocker "$@"
 }
 
+# Remove Docker Container
+rm-con()
+{
+    docker rm $(docker stop $1)
+}
 
-d-kill () {
-  docker rm $(docker stop $1)
+# Clean Docker Container
+clean-con()
+{
+    docker rm $(docker stop $(docker ps -a | awk '{print $1}' | tail -n +2))
+}
+
+# Clean Docker Image
+clean-img()
+{
+    docker image rm $(docker image list | awk '{print $1":"$2}' | tail -n +2)
 }
 
 
-d-start () {
-  docker build -t $1 .
-  docker run -itd $1
+# AWS PROFILEの切り替えコマンドエイリアス
+alias awsp="source _awsp"
+
+eval "$(direnv hook zsh)"
+export EDITOR=vim
+
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/daiki.ito/.dart-cli-completion/zsh-config.zsh ]] && . /Users/daiki.ito/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+
+
+# viモードを設定
+set -o vi
+
+# zsh docker auto completion config
+FPATH="$HOME/.zsh/completion:$FPATH"
+#fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit
+
+
+#--------------------------------
+# プロンプトを2行表示し、現在のモードを表示する。
+#--------------------------------
+
+autoload -Uz colors
+colors
+
+PROMPT_INS="%d %{${fg[blue]}%}[INSERT] %{${reset_color}%}>> "
+PROMPT_NOR="%d %{${fg[red]}%}[NORMAL] %{${reset_color}%}>> "
+PROMPT_VIS="%d %{${fg[green]}%}[VISUAL] %{${reset_color}%}>> "
+
+PROMPT=$PROMPT_INS
+
+function zle-line-pre-redraw {
+    if [[ $REGION_ACTIVE -ne 0 ]]; then
+        NEW_PROMPT=$PROMPT_VIS
+    elif [[ $KEYMAP = vicmd ]]; then
+        NEW_PROMPT=$PROMPT_NOR
+    elif [[ $KEYMAP = main ]]; then
+        NEW_PROMPT=$PROMPT_INS
+    fi
+
+    if [[ $PROMPT = $NEW_PROMPT ]]; then
+        return
+    fi
+
+    PROMPT=$NEW_PROMPT
+
+    zle reset-prompt
 }
+
+function zle-keymap-select zle-line-init {
+    case $KEYMAP in
+        vicmd)
+            PROMPT=$PROMPT_NOR
+            ;;
+        main|viins)
+            PROMPT=$PROMPT_INS
+            ;;
+    esac
+
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+zle -N zle-line-pre-redraw
+
+source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
