@@ -198,33 +198,33 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " vim alias
-cmap bc Bclose
-cmap tm terminal
-cmap pv PrevimOpen
+cmap bc? Bclose
+cmap tm? terminal
+cmap pv? PrevimOpen
 " cmap ali '<,'>Alignta <- //
-cmap tme TableModeEnable
-cmap tmd TableModeDisable
-cmap pinst PluginInstall
-cmap plist PluginList
-cmap qrun QuickRun
+cmap tme? TableModeEnable
+cmap tmd? TableModeDisable
+cmap pinst? PluginInstall
+cmap plist? PluginList
+cmap qrun? QuickRun
 
 cmap vconf e ~/.vimrc
 
 " Go alias
-cmap gr GoRun
-cmap gb GoBuild
-cmap gtt GoTest
-cmap gtf GoTestFunc
-cmap gtc GoTestCompile
-cmap gcc GoCoverage
-cmap gcl GoCoverageClear
-cmap gct GoCoverageToggle
-cmap gcb GoCoverageBrowser
-cmap gim GoImport
-cmap gims GoImports
-cmap gima GoImportAs
-cmap gill GoInstall
-cmap gdp GoDrop
+cmap goru? GoRun
+cmap gobu? GoBuild
+cmap gott? GoTest
+cmap gotf? GoTestFunc
+cmap gotc? GoTestCompile
+cmap gocc? GoCoverage
+cmap gocl? GoCoverageClear
+cmap goct? GoCoverageToggle
+cmap gocb? GoCoverageBrowser
+cmap goim? GoImport
+cmap goims? GoImports
+cmap goima? GoImportAs
+cmap goill? GoInstall
+cmap godp? GoDrop
 
 " GO カバレッジToggle
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
