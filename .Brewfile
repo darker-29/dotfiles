@@ -39,6 +39,7 @@ brew "yarn"
 brew "bat"
 brew "exa"
 brew "devtoys"
+brew "wezterm"
 
 brew "lazygit"
 brew "lazydocker"
